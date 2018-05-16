@@ -1,12 +1,12 @@
 
-    <div class="row head">
+    <div class="row">
         <h2>Gestion des cartes</h2>
     </div>
-    <div class="row corps">
+    <div class="row">
 
         <!-- ZONE DE GAUCHE: CARTES -->
-        <div class="col-3 gauche">
-            <h4>Mes cartes</h4>
+        <div class="col-3 item">
+            <h4><U>Mes cartes</U></h4>
             <br>
             <!-- Zone d'ajout d'une carte -->
             <div>
@@ -16,7 +16,7 @@
                         <span class="input-group-text" id="basic-addon1">Nom</span>
                     </div>
                     <input type="text" class="form-control" placeholder="Nom de la carte" aria-label="cardName" aria-describedby="cardName" id="nouveauNomCarte">
-                    <button type="button" class="btn btn-success" onclick="addCarte();">
+                    <button type="button" class="btn btn-outline-success" onclick="addCarte();">
                         <b>+</b>
                     </button>
                 </div>
@@ -27,12 +27,11 @@
         </div>
 
         <!-- ZONE DE DROITE -->
-        <div class="col-9 droite">
+        <div class="col-9 item">
+            <h4 id="titreCarte"><U>Infos de la carte:</U></h4>
             <!-- Zone affichage carte en cours -->
-            <div class="row infosCarte">
+            <div class="row">
                 <div class="col-4">
-
-                    <h4>Infos carte</h4>
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
                             <span class="input-group-text">Nom</span>
@@ -70,9 +69,10 @@
                 </div>
             </div>
             <hr>
+            <h4><U>Menus disponibles:</U></h4>
             <!-- Ajouter Menu-->
             <div class="row">
-                <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#showMenu" onclick="showMeTheMenu(0);">+ Créer Menu</button>
+                <button type="button" class="btn btn-outline-primary btn-sm" data-toggle="modal" data-target="#showMenu" onclick="showMeTheMenu(0);">+ Créer Menu</button>
             </div>
             <!-- Zone affichage de tous les menus -->
             <div class="row listeMenus">
