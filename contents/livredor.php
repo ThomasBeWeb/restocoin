@@ -6,7 +6,7 @@
 
 //Si session, affichage du module insertion de message sinon message demandant connexion
 
-if($_SESSION){
+if(isset($_COOKIE['username'])){
 ?> 
     <h4><b>Ajouter un commentaire</b></h4>
     <form class="form" action="<?=$racine?>?page=livredor" role="form" method="post">
@@ -45,7 +45,7 @@ if(isset($_POST['message'])){ //Si message envoye
 
     //Recup des infos
     $dateMessage = date("d/m/Y H:i");
-    $user = $_SESSION['username'];
+    $user = $_COOKIE['username'];
     $message = $_POST['message'];
 
     //Determiner le nouvel ID
