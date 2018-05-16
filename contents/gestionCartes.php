@@ -17,7 +17,7 @@
                     </div>
                     <input type="text" class="form-control" placeholder="Nom de la carte" aria-label="cardName" aria-describedby="cardName" id="nouveauNomCarte">
                     <button type="button" class="btn btn-outline-success" onclick="addCarte();">
-                        <b>+</b>
+                        <b><i class="fas fa-plus"></i></b>
                     </button>
                 </div>
             </div>
@@ -36,7 +36,10 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text">Nom</span>
                         </div>
-                        <input type="text" class="form-control" aria-label="Username" aria-describedby="basic-addon1" id="nomCarteEdit">
+                        <input type="text" class="form-control form-control-sm" aria-label="Username" aria-describedby="basic-addon1" id="nomCarteEdit" aria-disabled="true" disabled>
+                        <button type="button" id="buttName" class="btn btn-outline-success" onclick="addCarte();" aria-disabled="true" disabled>
+                        <b><i class="fas fa-check"></i></b>
+                    </button>
                     </div>
                     <br>
                     <!-- Ajout carte sur site vitrine -->

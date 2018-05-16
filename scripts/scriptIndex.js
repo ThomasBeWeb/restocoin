@@ -87,6 +87,10 @@ function showMeACard(idCarte) {
     //Ajout du nom de la carte
     $("#nomCarteEdit").val(carteAAfficher.nom);
 
+    //Activation et modif du input name
+    $("#nomCarteEdit").removeAttr('disabled');
+    $("#nomCarteEdit").attr("aria-disabled", false);
+
     //Activation et modif de l'action du checkbox
     $("#afficheSiteCheck").removeAttr('disabled');
     $("#afficheSiteCheck").attr("aria-disabled", false);
@@ -158,9 +162,13 @@ function deleteCardForGood(idCarte){
             //Affichage de la liste de carte mise à jour
             showCartes();
 
-            //Bouton supprimer disabled
+            //Bouton supprimer disabledinputCardName
             $("#modalSuppCarte").attr("aria-disabled", true)
             $("#modalSuppCarte").prop("disabled", true);
+
+            //Input card name disabled
+            $("#inputCardName").attr("aria-disabled", true)
+            $("#inputCardName").prop("disabled", true);
 
             //Fermeture de la modal
             $('#deleteCard').modal('hide');
@@ -443,3 +451,11 @@ $("#afficheSiteCheck").change(function() {
     });
 
 });
+
+//On change input card name -> enable button
+$("#nomCarteEdit").change(function() {
+    if($("#nomCarteEdit").hasClass("disabled")){
+        $("#buttName").removeAttr('disabled');
+        $("#buttName").attr("aria-disabled", false);
+    };
+  });
