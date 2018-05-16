@@ -1,4 +1,4 @@
 <?php
 //Dossier racine
-    $racine = "http://restologue/";
+    $racine = "http://restocoin/";
     //$racine = "http://localhost/RestologueFull/";  
