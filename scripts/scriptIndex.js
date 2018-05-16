@@ -78,6 +78,9 @@ function showMeACard(idCarte) {
         }
     });
 
+    //Affichage du titre
+    $("#titreCarte").html("<U>Infos de la carte:</U> <b>" + carteAAfficher.nom + "</b>");
+
     //Mise en memoire de l'id de la carte selectionnee dans l'input stockIDCarte
     $("#stockIDCarte").val(carteAAfficher.id);
 
@@ -150,6 +153,7 @@ function deleteCardForGood(idCarte){
             $("#nomCarteEdit").val("");
             $("#stockIDCarte").val(0);
             $("#listeMenusCarte").empty();
+            $("#titreCarte").html("<U>Infos de la carte:</U>");
 
             //Affichage de la liste de carte mise à jour
             showCartes();
