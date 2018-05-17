@@ -138,6 +138,9 @@ function showMeACard(idCarte) {
 $("#nomCarteEdit").on("input", function() {
     $("#buttName").removeAttr('disabled');
     $("#buttName").attr("aria-disabled", false);
+
+    //Bordure input par defaut
+    $("#nomCarteEdit").css("border","");
 });
 
 //Fonction pour changer le nom de la carte
@@ -153,9 +156,7 @@ function changeMyName(idCarte){
         url: "https://whispering-anchorage-52809.herokuapp.com/cartes/" + idCarte +"/" + newName,
         async: false,
         success: function (data) {
-            //Affichage bordure input en vert
-            $("nomCarteEdit").css("border: 2px solid green");
-
+            
             //Reload de la liste des cartes pour prendre en compte le changement de nom
             showCartes();
 
@@ -163,6 +164,14 @@ function changeMyName(idCarte){
             showMeACard(idCarte);
         }
     });
+
+    //Affichage bordure input en vert
+    $("#nomCarteEdit").css("border","2px solid green");
+
+    //Bouton disabled
+    $("#buttName").attr("aria-disabled", true)
+    $("#buttName").prop("disabled", true);
+
 };
 
 
@@ -480,8 +489,8 @@ $("#afficheSiteCheck").change(function() {
         type: "GET",
         url: "https://whispering-anchorage-52809.herokuapp.com/cartes/" + idCarteEnCours + "/online",
         async: false,
-        success: function (data) {
-            console.log(data);
+        success: function () {
+
         },
         error: function () {
             alert("Erreur dans la modification");
