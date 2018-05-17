@@ -55,8 +55,6 @@
         <div class="col-5 elementCol mx-auto">
             <h4>Ajouter un administrateur</h4>
 
-            <form class="form" action="'.$homedir.'login.php" role="form" method="post">
-
                 <div class="col">
                     <label for="username">Pseudo</label>
                     <input class="form-control" name="username" id="username" type="text" width="10px">
@@ -67,8 +65,7 @@
                     <input class="form-control" name="password" id="password" type="text">
                 </div>
                 <br>
-                <button type="submit" class="btn btn-primary btn-sm">Ajouter</button>
-            </form>
+                <button type="submit" class="btn btn-primary btn-sm" onclick="addUser();">Ajouter</button>
         </div>
     </div>
 </div>
