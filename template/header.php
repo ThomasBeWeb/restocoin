@@ -1,3 +1,14 @@
+<?php
+    //Securite: Verification de $_SESSION avant d'afficher les pages admin cartes et user
+    if($_GET){
+        if($_GET['page'] === "gestionCartes" OR $_GET['page'] === "gestionUsers"){
+            if(isset($_COOKIE['fonction']) === false OR $_COOKIE['fonction'] !== "admin" OR $_COOKIE['checked'] !== "true"){
+                header("location: " . $GLOBALS['racine']);
+            }
+        }
+    };
+?>
+
 <!DOCTYPE html>
 <html>
 

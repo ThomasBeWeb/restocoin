@@ -34,7 +34,7 @@ if($_POST){
 
         if($result === "true"){   //Password OK
             setcookie("checked", "true", time()+3600);
-            header("location: " . $racine);
+            header("location: " . $GLOBALS['racine']);
         }else{
             echo showMeTheLoginPage();
         }
@@ -69,8 +69,8 @@ if($_POST){
     setcookie("fonction", "" , time() - 3600);
     setcookie("checked", "" , time() - 3600);
 
-    if($_SERVER['HTTP_REFERER'] === $racine."?page=gestionCartes" OR $_SERVER['HTTP_REFERER'] === $racine."?page=gestionUsers"){
-        header("location: " . $racine);
+    if($_SERVER['HTTP_REFERER'] === $GLOBALS['racine']."?page=gestionCartes" OR $_SERVER['HTTP_REFERER'] === $GLOBALS['racine']."?page=gestionUsers"){
+        header("location: " . $GLOBALS['racine']);
     }else{
         header("location: ".$_SERVER['HTTP_REFERER']);
     }
