@@ -1,3 +1,47 @@
+$( document ).ready(function() {
+    showTheUsers();
+});
+
+//Affichage liste users
+
+function showTheUsers(){
+
+    //Clear de la table
+    $("#tableUsers").empty();
+
+    //Recup de la liste
+
+    var listeUsers;
+
+    $.ajax({
+        type: "GET",
+        url: "https://whispering-anchorage-52809.herokuapp.com/users/get",
+        async: false,
+        success: function (data) {
+            listeUsers = data;
+        }
+    });
+
+    //Affichage lignes
+
+    for(var i = 0 ; i < listeUsers.length ; i++){
+
+        $("#tableUsers").append($("<tr>")
+            .append($("<td>")
+                .attr("scope","col")
+                .text(listeUsers[i].username)
+            )
+            .append($("<td>")
+                .attr("scope","col")
+                .text(listeUsers[i].password)
+            )
+            .append($("<td>")
+                .attr("scope","col")
+            )
+        )
+    }
+}
+
 $("#username").on("input", function() {
 
     var testLogin = $("#username").val();
@@ -67,7 +111,7 @@ function addUser(){
             async: false,
     
             success: function (data) {
-                console.log("user ajouté");
+                showTheUsers();
             }
         });
     }
