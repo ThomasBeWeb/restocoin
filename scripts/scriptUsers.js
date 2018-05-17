@@ -37,6 +37,12 @@ function showTheUsers(){
             )
             .append($("<td>")
                 .attr("scope","col")
+                .append($("<button>")
+                    .addClass("btn btn-outline-danger btn-sm ptitButton")
+                    .attr("type", "button")
+                    .html("<i class='far fa-times-circle'></i>")
+                    .attr("onclick", "deleteUser(" + listeUsers[i].id + ");")
+                )
             )
         )
     }
@@ -115,4 +121,18 @@ function addUser(){
             }
         });
     }
+}
+
+//Delete a user
+
+function deleteUser(id){
+
+    $.ajax({
+        type: "GET",
+        url: "https://whispering-anchorage-52809.herokuapp.com/users/" + id + "/remove",
+        async: false,
+        success: function () {
+            showTheUsers();
+        }
+    });
 }
