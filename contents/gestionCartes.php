@@ -37,7 +37,7 @@
                             <span class="input-group-text">Nom</span>
                         </div>
                         <input type="text" class="form-control form-control-sm" aria-label="Username" aria-describedby="basic-addon1" id="nomCarteEdit" aria-disabled="true" disabled>
-                        <button type="button" id="buttName" class="btn btn-outline-success" onclick="addCarte();" aria-disabled="true" disabled>
+                        <button type="button" id="buttName" class="btn btn-outline-success" onclick="" aria-disabled="true" disabled>
                         <b><i class="fas fa-check"></i></b>
                     </button>
                     </div>

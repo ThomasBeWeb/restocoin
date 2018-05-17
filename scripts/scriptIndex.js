@@ -91,11 +91,13 @@ function showMeACard(idCarte) {
     $("#nomCarteEdit").removeAttr('disabled');
     $("#nomCarteEdit").attr("aria-disabled", false);
 
+    //Modif de la fonction du bouton 
+    $("#buttName").attr("onclick", "changeMyName(" + carteAAfficher.id + ");");
+    
+
     //Activation et modif de l'action du checkbox
     $("#afficheSiteCheck").removeAttr('disabled');
     $("#afficheSiteCheck").attr("aria-disabled", false);
-
-    console.log(carteAAfficher);
 
     if(carteAAfficher.online === "true"){
         
@@ -131,6 +133,38 @@ function showMeACard(idCarte) {
         }
     }
 };
+
+//On change input card name -> enable button
+$("#nomCarteEdit").on("input", function() {
+    $("#buttName").removeAttr('disabled');
+    $("#buttName").attr("aria-disabled", false);
+});
+
+//Fonction pour changer le nom de la carte
+
+function changeMyName(idCarte){
+
+    //Nouveau nom
+    var newName = $("#nomCarteEdit").val();
+
+    //Recuperation de la carte
+    $.ajax({
+        type: "GET",
+        url: "https://whispering-anchorage-52809.herokuapp.com/cartes/" + idCarte +"/" + newName,
+        async: false,
+        success: function (data) {
+            //Affichage bordure input en vert
+            $("nomCarteEdit").css("border: 2px solid green");
+
+            //Reload de la liste des cartes pour prendre en compte le changement de nom
+            showCartes();
+
+            //Reload de la carte pour prendre en compte le changement de nom
+            showMeACard(idCarte);
+        }
+    });
+};
+
 
 //Supprimer definitivement une carte => Modal de confirmation
 function deleteCarCheck(idCarte) {
@@ -169,6 +203,10 @@ function deleteCardForGood(idCarte){
             //Input card name disabled
             $("#inputCardName").attr("aria-disabled", true)
             $("#inputCardName").prop("disabled", true);
+
+            //Bouton valider change cardname disabled
+            $("#deleteCardButt").attr("aria-disabled", true)
+            $("#deleteCardButt").prop("disabled", true);
 
             //Fermeture de la modal
             $('#deleteCard').modal('hide');
@@ -452,10 +490,3 @@ $("#afficheSiteCheck").change(function() {
 
 });
 
-//On change input card name -> enable button
-$("#nomCarteEdit").change(function() {
-    if($("#nomCarteEdit").hasClass("disabled")){
-        $("#buttName").removeAttr('disabled');
-        $("#buttName").attr("aria-disabled", false);
-    };
-  });
