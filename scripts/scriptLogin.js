@@ -1,0 +1,3 @@
+function showMeTheModal(){
+    $("#loginModal").modal();
+}

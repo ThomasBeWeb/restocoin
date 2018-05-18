@@ -1,37 +1,67 @@
 <?php
-
-//recup de la liste des fichiers du dossier content
-$fichiers = scandir("./contents/");
-
-//Creation de la liste de fichiers sous la forme: nom du lien => lien
-$listeFichiers = array("Home" => $GLOBALS['racine']);
-
-foreach($fichiers as $value){
-
-    //Pour les fichiers:
-    if(is_file("./contents/".$value) AND $value !== "gestionCartes.php" AND $value !== "gestionUsers.php"){     //Verifie si fichier et pas admin
-        
-        //recup du nom du lien: nom du fichier sans .php
-        $name = explode(".php", $value);
-
-        //Ajout dans le tableau
-        $listeFichiers[$name[0]] = $GLOBALS['racine']."?page=".$name[0];
-    
-    }
-}
-
-//Si Admin ET password confirmé, ajout de la page Administration
-if(isset($_COOKIE['fonction'])){
-    if($_COOKIE['fonction'] === "admin" AND $_COOKIE['checked'] === "true"){
-        $listeFichiers['Gestion cartes'] = $GLOBALS['racine']."?page=gestionCartes";
-        $listeFichiers['Gestion users'] = $GLOBALS['racine']."?page=gestionUsers";
-    }
-}
+require('./folder.php');
 ?>
 
-<div class="d-flex flex-row align-items-center">
+<script>
 
-<?php
+//Liste des liens
+
+var linksListe = [
+    {
+        name: "Home",
+        link: <?=$GLOBALS['racine'];?>
+    },
+    {
+        name: "Nos cartes",
+        link: <?=$GLOBALS['racine'];?> + "?page=cartes"
+    },
+    {
+        name: "Contact",
+        link: <?=$GLOBALS['racine'];?> + "?page=contact"
+    },
+    {
+        name: "Livre d'Or",
+        link: <?=$GLOBALS['racine'];?> + "?page=livredor"
+    }
+];
+
+//Ajout des liens admins cartes et users si connecté
+
+<?php if(isset($_COOKIE['fonction'])):?>
+    <?php if($_COOKIE['fonction'] === "admin" AND $_COOKIE['checked'] === "true"):?>
+        var addCartes = 
+        {
+        name: "Gestion cartes",
+        link: <?=$GLOBALS['racine'];?> + "?page=gestionCartes"
+        };
+
+        linksListe.push(addCartes);
+
+        var addUsers = 
+        {
+        name: "Gestion users",
+        link: <?=$GLOBALS['racine'];?> + "?page=gestionUsers"
+        };
+
+        linksListe.push(addUsers);
+
+    <?php endif; ?>
+<?php endif; ?>
+</script>
+
+<div class="d-flex flex-row align-items-center" id="navDiv">
+
+<script>
+
+    for(var i = 0 ; i < linksListe.length ; i++){
+
+        if($(location).attr('href') === linksListe[i].link){
+
+            $('#navDiv').append($('<div>')
+                .add
+            )
+        }
+    }
 
 //Boucle sur la liste des fichiers et dossiers et affiche
 
@@ -53,9 +83,9 @@ foreach($listeFichiers as $key => $value){
     if($key === "livredor"){
         $key = "Livre d'or";
     }
-?>
+
     <a href=<?=$value?>><?=$key?></a></div>
-<?php
+    </script>
 }
 //Partie connexion
 ?>
@@ -69,11 +99,9 @@ foreach($listeFichiers as $key => $value){
         </div>
 <?php else: ?>
     <div class="ml-auto p-2">
-            <form class="form-inline" action="<?=$GLOBALS['racine'].'login.php'?>" role="form" method="post">
-                <h6 class="titreMiddle">Username</h6>
-                <input type="text" class="form-control form-control-sm" name="username" id="username"  placeholder="Enter your Username" value="administrateur"/>
-                <button type="submit" class="btn btn-primary btn-sm">Login</button>
-            </form>
-        </div>
+            <h6 class="titreMiddle">Username</h6>
+            <input type="text" class="form-control form-control-sm" name="username" id="username"  placeholder="Enter your Username" value="administrateur"/>
+            <button type="submit" class="btn btn-primary btn-sm">Login</button>
+    </div>
 <?php endif; ?>
 </div>
