@@ -63,63 +63,139 @@ for(var i = 0 ; i < linksListe.length ; i++){
             )
     );
 };
-   
 
-//Partie connexion
+showMeTheConnectAreaOrNot();
 
-var flag = false;
 
-//Verifie si cookie contient le nom d'un user
-for(var key in listeCookies){
+function showMeTheConnectAreaOrNot(){
 
-    if(key === "username"){
-        flag = true;
+    var listeCookies = document.cookie;
+
+    //Supression des elements de connection si existent
+    $(".connectPart").remove();
+
+    //Verifie si cookie contient le nom d'un user et affiche la partie connection en fonction
+
+    if(checkCookie('username')){
+
+        var userName = getCookie('username');
+
+        $('#navDiv').append($('<div>')
+            .addClass('ml-auto p-2 connectPart')
+            .append($('<h6>')
+                .addClass('titreMiddle')
+                .text(userName)
+            )
+        )
+        $('#navDiv').append($('<div>')
+            .addClass('p-2 connectPart')
+            .append($('<a>')
+                .attr('href','#')
+                .attr("onclick", "disconnectMePlease();")
+                .html('<i class="fas fa-window-close"></i>')
+            )
+        )
+
+    }else{
+
+        $('#navDiv').append($('<div>')
+            .addClass('ml-auto p-2 connectPart')
+            .append($('<h6>')
+                .addClass('titreMiddle')
+                .text('Username')
+            )
+        )
+        $('#navDiv').append($('<div>')
+            .addClass('p-2 connectPart')
+            .append($('<input>')
+                .attr('type',"text")
+                .addClass("form-control form-control-sm")
+                .attr('name','username')
+                .attr('id','username')            
+                .attr('placeholder','Enter your Username')
+                .attr('value','administrateur')
+            )
+        )
+        $('#navDiv').append($('<div>')
+            .addClass('p-2 connectPart')
+            .append($('<button>')
+                .attr('type',"button")
+                .addClass('btn btn-primary btn-sm')
+                .attr("onclick", "goCheckConnect();")
+                .text('Login')
+            )
+        )
     }
 };
 
-if(flag){
+function goCheckConnect(){
+   
+    //Check Login
 
-    $('#navDiv').append($('<div>')
-        .addClass('ml-auto p-2')
-        .append($('<h6>')
-            .addClass('titreMiddle')
-            .text(listeCookies.username)
-        )
-    )
-    $('#navDiv').append($('<div>')
-        .addClass('p-2')
-        .append($('<a>')
-            .attr('href',racine + 'login.php')
-            .html('<i class="fas fa-window-close"></i>')
-        )
-    )
+    var userName = $('#username').val();
 
-}else{
+    document.cookie = "username=" + userName + "; expires=Thu, 18 Dec 2019 12:00:00 UTC; path=/";
 
-    $('#navDiv').append($('<div>')
-        .addClass('ml-auto p-2')
-        .append($('<h6>')
-            .addClass('titreMiddle')
-            .text('Username')
-        )
-    )
-    $('#navDiv').append($('<div>')
-        .addClass('p-2')
-        .append($('<input>')
-            .attr('type',"text")
-            .addClass("form-control form-control-sm")
-            .attr('name','username')
-            .attr('id','username')            
-            .attr('placeholder','Enter your Username')
-            .attr('value','administrateur')
-        )
-    )
-    $('#navDiv').append($('<div>')
-        .addClass('p-2')
-        .append($('<button>')
-            .attr('type',"submit")
-            .addClass('btn btn-primary btn-sm')
-            .text('Login')
-        )
-    )
+    //Verif si admin
+
+    var typeUser;
+
+    $.ajax({
+        type: "GET",
+        url: "https://whispering-anchorage-52809.herokuapp.com/use/" + userName,
+        async: false,
+        success: function (data) {
+            typeUser = data;
+            document.cookie = "fonction=" + typeUser + "; expires=Thu, 18 Dec 2019 12:00:00 UTC; path=/";
+        }
+    });
+
+    if(typeUser === "admin"){  //Si admin affichage de la page login
+
+        console.log("Verif login");
+
+    }else{
+        showMeTheConnectAreaOrNot();
+    };
+    
+}
+
+//Disconnect
+
+function disconnectMePlease(){
+
+    //Suppression des cookies
+    document.cookie = "username=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/";
+    document.cookie = "fonction=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/";
+
+    //Reload de la partie connect
+    showMeTheConnectAreaOrNot();
+
+    console.log("disconnect");
+}
+
+//FONCTIONS COOKIES
+
+function getCookie(cname) {
+    var name = cname + "=";
+    var ca = document.cookie.split(';');
+    for(var i = 0; i < ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0) == ' ') {
+            c = c.substring(1);
+        }
+        if (c.indexOf(name) == 0) {
+            return c.substring(name.length, c.length);
+        }
+    }
+    return "";
+}
+
+function checkCookie(type) {
+    var value = getCookie(type);
+    if (value != "") {
+        return true;
+    } else {
+        return false;
+    }
 }
