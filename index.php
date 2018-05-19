@@ -4,7 +4,7 @@ require('./folder.php');
 include "./template/header.php";
 include "./template/navigation.php";
 
-//include "./template/modal.html";
+include "./template/modal.html";
 
 //Affichage content en fonction du GET
 

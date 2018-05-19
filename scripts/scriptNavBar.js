@@ -22,50 +22,59 @@ var linksListe = [
     }
 ];
 
-//Ajout des liens admins cartes et users si connecté
-var listeCookies = document.cookie;
+$( document ).ready(function() {
+    showMeTheLinks();
+});
 
-if(listeCookies.includes('checked') && listeCookies.includes('admin')){
-    var addCartes = 
-    {
-    name: "Gestion cartes",
-    link: racine + "?page=gestionCartes"
-    };
 
-    linksListe.push(addCartes);
 
-    var addUsers = 
-    {
-    name: "Gestion users",
-    link: racine + "?page=gestionUsers"
-    };
+function showMeTheLinks(){
 
-    linksListe.push(addUsers);
-}
+    //Vide la div navBar
+    $('#navDiv').empty();
 
-//Creation et affichage
-for(var i = 0 ; i < linksListe.length ; i++){
+    //Ajout des liens admins cartes et users si connecté
 
-    //Si page affichee lien actif
-    var selectionOrNot;
+    if(getCookie('checked') === 'true' && getCookie('fonction') === 'admin'){
+        var addCartes = 
+        {
+        name: "Gestion cartes",
+        link: racine + "?page=gestionCartes"
+        };
 
-    if($(location).attr('href') === linksListe[i].link){
-        selectionOrNot = "p-2 pageSelected";
-    }else{
-        selectionOrNot = "p-2";
+        linksListe.push(addCartes);
+
+        var addUsers = 
+        {
+        name: "Gestion users",
+        link: racine + "?page=gestionUsers"
+        };
+
+        linksListe.push(addUsers);
     }
 
-    $('#navDiv').append($('<div>')
-            .addClass(selectionOrNot)
-            .append($('<a>')
-                .attr('href',linksListe[i].link)
-                .text(linksListe[i].name)
-            )
-    );
-};
+    //Creation et affichage
+    for(var i = 0 ; i < linksListe.length ; i++){
 
-showMeTheConnectAreaOrNot();
+        //Si page affichee lien actif
+        var selectionOrNot;
 
+        if($(location).attr('href') === linksListe[i].link){
+            selectionOrNot = "p-2 pageSelected";
+        }else{
+            selectionOrNot = "p-2";
+        }
+
+        $('#navDiv').append($('<div>')
+                .addClass(selectionOrNot)
+                .append($('<a>')
+                    .attr('href',linksListe[i].link)
+                    .text(linksListe[i].name)
+                )
+        );
+    };
+    showMeTheConnectAreaOrNot();
+}
 
 function showMeTheConnectAreaOrNot(){
 
@@ -152,12 +161,63 @@ function goCheckConnect(){
 
     if(typeUser === "admin"){  //Si admin affichage de la page login
 
-        console.log("Verif login");
+        $('#loginModal').modal('show');
 
     }else{
-        showMeTheConnectAreaOrNot();
+        
+        //Si page livre d'or, reload de la page sion reload juste de la navbar
+
+        if($(location).attr('href') === racine + "?page=livredor"){
+            $(location).attr("href", racine + "?page=livredor");
+        }else{
+            //Reload de la partie connect
+            showMeTheLinks();
+        }
     };
     
+}
+
+//Check Login Password
+
+function checkAdmin(){
+
+    //Recup des infos
+    var testUser = {
+        username: $('#username').val(),
+        password: $('#password').val()
+        };
+
+    var result;
+
+    $.ajax({
+        type: "POST",
+        url: "https://whispering-anchorage-52809.herokuapp.com/verify",
+        data: testUser,
+        async: false,
+
+        success: function (data) {
+            result = data;
+        }
+    });
+
+    if(result){ //User admin
+        //Cookie checked true
+        document.cookie = "checked=true; expires=Thu, 18 Dec 2019 12:00:00 UTC; path=/";
+    }else{
+        document.cookie = "checked=false; expires=Thu, 18 Dec 2019 12:00:00 UTC; path=/";
+    }
+
+    //Si page livre d'or, reload de la page sion reload juste de la navbar
+
+    if($(location).attr('href') === racine + "?page=livredor"){
+        $(location).attr("href", racine + "?page=livredor");
+    }else{
+        //Reload de la partie connect
+        showMeTheLinks();
+
+        //Fermeture du modal
+        $('#loginModal').modal('hide');
+    }
 }
 
 //Disconnect
@@ -167,11 +227,17 @@ function disconnectMePlease(){
     //Suppression des cookies
     document.cookie = "username=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/";
     document.cookie = "fonction=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/";
+    document.cookie = "checked=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/";
 
-    //Reload de la partie connect
-    showMeTheConnectAreaOrNot();
+    //Si page admin cartes ou users, redirection vers home, si page login reload de la page, sinon reload navBar
 
-    console.log("disconnect");
+    if($(location).attr('href') === racine + "?page=gestionUsers" || $(location).attr('href') === racine + "?page=gestionCartes"){
+        $(location).attr("href", racine);
+    }else if($(location).attr('href') === racine + "?page=livredor"){
+        $(location).attr("href", racine + "?page=livredor");
+    }else{ 
+        showMeTheLinks();
+    }
 }
 
 //FONCTIONS COOKIES
