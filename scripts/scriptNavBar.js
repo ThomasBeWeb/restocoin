@@ -177,7 +177,7 @@ function goCheckConnect(){
     
 }
 
-//Check Login Password
+//Check Login Password Admin
 
 function checkAdmin(){
 
