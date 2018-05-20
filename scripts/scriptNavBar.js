@@ -1,13 +1,9 @@
 
 var racine = "http://localhost/restocoin/";
 
-
-
 $( document ).ready(function() {
     showMeTheLinks();
 });
-
-
 
 function showMeTheLinks(){
 
