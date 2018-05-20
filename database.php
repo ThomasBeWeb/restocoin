@@ -1,22 +1,35 @@
 <?php
-try {
-    $dbh = new PDO('mysql:host=localhost;dbname=test', 'root', 'password');
 
-} catch (PDOException $e) {
-    print "Erreur !: " . $e->getMessage() . "<br/>";
-    die();
+class Database
+{
+    private static $dbHost = "localhost";
+    private static $dbName = "RESTO_DB_BWB";
+    private static $dbUsername = "root";
+    private static $dbUserpassword = "root";
+    
+    private static $connection = null;
+    
+    public static function connect()
+    {
+        if(self::$connection == null)
+        {
+            try
+            {
+              self::$connection = new PDO("mysql:host=" . self::$dbHost . ";dbname=" . self::$dbName , self::$dbUsername, self::$dbUserpassword);
+                self::$connection->exec("SET CHARACTER SET utf8");
+            }
+            catch(PDOException $e)
+            {
+                die($e->getMessage());
+            }
+        }
+        return self::$connection;
+    }
+    
+    public static function disconnect()
+    {
+        self::$connection = null;
+    }
+
 }
-
-var_dump($dbh);
-
-//Requete SQL (corps de la requête) du point de vue metier
-$request = "SELECT * FROM eleve";
-var_dump($request);
-// Execution de la requête
-$statement = $dbh->query($request);
-var_dump($statement);
-//Recuperation du resultat de la requête
-$eleves = $statement->fetchAll();
-print_r($eleves);
-
 ?>

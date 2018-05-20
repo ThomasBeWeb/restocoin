@@ -1,5 +1,5 @@
 <?php
-require('./folder.php');
+require('./config.php');
 
 include "./template/header.php";
 include "./template/modal.html";
