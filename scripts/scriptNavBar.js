@@ -1,26 +1,7 @@
 
 var racine = "http://localhost/restocoin/";
 
-//Liste des liens
 
-var linksListe = [
-    {
-        name: "Home",
-        link: racine
-    },
-    {
-        name: "Nos cartes",
-        link: racine + "?page=cartes"
-    },
-    {
-        name: "Contact",
-        link: racine + "?page=contact"
-    },
-    {
-        name: "Livre d'Or",
-        link: racine + "?page=livredor"
-    }
-];
 
 $( document ).ready(function() {
     showMeTheLinks();
@@ -30,6 +11,26 @@ $( document ).ready(function() {
 
 function showMeTheLinks(){
 
+    //Liste des liens
+
+    var linksListe = [
+        {
+            name: "Home",
+            link: racine
+        },
+        {
+            name: "Nos cartes",
+            link: racine + "?page=cartes"
+        },
+        {
+            name: "Contact",
+            link: racine + "?page=contact"
+        },
+        {
+            name: "Livre d'Or",
+            link: racine + "?page=livredor"
+        }
+    ];
     //Vide la div navBar
     $('#navDiv').empty();
 

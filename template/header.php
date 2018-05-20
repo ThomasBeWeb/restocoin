@@ -37,3 +37,6 @@
     </head>
         <body>
         <div class="container-fluid">
+        <!-- Creation de la NavBar en flexBox -->
+
+        <div class="d-flex flex-row align-items-center" id="navDiv"></div>
