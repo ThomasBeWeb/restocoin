@@ -50,9 +50,8 @@ function deleteMenu($id){
 function updateMenu($Menu){
 
     /*
-    *Modifie les donnees d'une MENU.
-    *$Menu doit contenir l'id de la MENU à modifier
-    *La date ne peut pas être modifiée
+    *Modifie les donnees d'un MENU.
+    *$Menu doit contenir l'id du MENU à modifier
     */
 
     //Recup des infos
