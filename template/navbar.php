@@ -1,5 +1,4 @@
 <?php
-var_dump($_COOKIE);
 //Liste des liens de base
 $listeFichiers = array(
     "Home" => $GLOBALS['racine'],
