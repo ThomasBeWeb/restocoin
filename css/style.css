@@ -19,6 +19,9 @@ a{
     font-size: 90px;
 }
 
+.form-inline>*{
+    margin: 0px 4px;
+}
 .titreMiddle{
     margin-bottom: 0px !important;
 }
@@ -46,4 +49,8 @@ a{
 
 .pageSelected{
     font-weight: bold;
+}
+
+.wrongInput{
+    border: 2px solid red;
 }

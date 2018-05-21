@@ -43,9 +43,9 @@ if(isset($_COOKIE['checked']) AND $_COOKIE['checked'] === "ok" AND isset($_COOKI
             <div class="ml-auto p-2">
                 <form class="form-inline" action=<?=$GLOBALS['racine']."login.php"?> role="form" method="post">
                     <h6 class="titreMiddle">Username</h6>
-                    <input type="text" class="form-control form-control-sm" name="username" id="username"  placeholder="Enter your Username" value=<?=$_COOKIE['username'];?>/>
+                    <input type="text" class="form-control form-control-sm" name="username" id="username"  placeholder="Enter your Username" value=<?=$_COOKIE['username'];?>>
                     <h6 class="titreMiddle">Password</h6>
-                    <input type="password" class="form-control form-control-sm" name="password" id="password"  placeholder="password"/>
+                    <input type="password" class="form-control form-control-sm wrongInput" name="password" id="password"  placeholder="password">
                     <button type="submit" class="btn btn-primary btn-sm">Login</button>
                 </form>
             </div>
@@ -62,8 +62,10 @@ if(isset($_COOKIE['checked']) AND $_COOKIE['checked'] === "ok" AND isset($_COOKI
         <?php endif; ?>
 
     <?php else: ?> <!-- Username pas OK ou Pas de cookie username -->
-
         <div class="ml-auto p-2">
+            <button type="submit" class="btn btn-outline-success btn-sm" onclick="showMeTheInscription();">Inscription</button>
+        </div>
+        <div class="p-2">
             <form class="form-inline" action=<?=$GLOBALS['racine']."login.php"?> role="form" method="post">
                 <h6 class="titreMiddle">Username</h6>
                 <input type="text" class="form-control form-control-sm" name="username" id="username"  placeholder="Enter your Username" value="administrateur"/>
@@ -80,47 +82,3 @@ if(isset($_COOKIE['checked']) AND $_COOKIE['checked'] === "ok" AND isset($_COOKI
     <?php endif; ?>
 
 </div>
-
-<!-- Forcer la modal inscription
-        <div class="row main">
-            <div class="main-login main-center">
-                <form action="'.$GLOBALS['racine'].'login.php" role="form" method="post">
-                    <div class="form-group">
-                        <label for="username" class="cols-sm-2 control-label">Username</label>
-                        <div class="cols-sm-10">
-                            <div class="input-group">
-                                <span class="input-group-addon">
-                                    <i class="fa fa-users fa" aria-hidden="true"></i>
-                                </span>
-                                <input type="text" class="form-control" name="username" id="username" placeholder="Enter your Username" value="administrateur"/>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="password" class="cols-sm-2 control-label">Password</label>
-                        <div class="cols-sm-10">
-                            <div class="input-group">
-                                <span class="input-group-addon">
-                                    <i class="fa fa-lock fa-lg" aria-hidden="true"></i>
-                                </span>
-                                <input type="password" class="form-control" name="password" id="password" placeholder="Enter your Password" value=""/>
-                            </div>
-                        </div>                    
-                    </div>
-                    <div class="form-group ">
-                        <button type="submit" class="btn btn-primary btn-lg btn-block login-button">Login</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-</body>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js "></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js "></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js "></script>
-        <link href="./css/styleConnexion.css " rel="stylesheet ">
-</html>
-    
-    ';
-}
- -->

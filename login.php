@@ -4,7 +4,7 @@ require('./dao/users.php');
 
 //SI POST: Login SINON Deconnexion
 
-if(isset($_POST)){  //CONNEXION
+if($_POST){  //CONNEXION
 
     //Recup des infos:
     $username = $_POST['username'];

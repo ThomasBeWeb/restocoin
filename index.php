@@ -3,7 +3,7 @@ require('./config.php');
 
 include "./template/header.php";
 include "./template/navbar.php";
-include "./template/modal.html";
+include "./template/modal.php";
 
 //Affichage content en fonction du GET
 
