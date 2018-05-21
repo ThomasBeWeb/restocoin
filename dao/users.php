@@ -11,6 +11,18 @@ function showMeTheUsers(){
     return $results;
 };
 
+//RETOURNE UN SEUL USER
+function showMeThisUser($id){
+    $db = Database::connect();
+    $statement = $db->prepare("SELECT * FROM USERS WHERE id = ?");
+    $statement->execute(array($id));
+    $result = $statement->fetch();
+    Database::disconnect();
+
+    return $result;
+};
+
+
 //AJOUTE UN USER
 function addUser($newUser){
     //Recup des infos
