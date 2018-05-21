@@ -1,14 +1,13 @@
 <?php
 
-require_once("./dao/users.php");
+require_once("./dao/menus.php");
 
-//$test = array('id_username' => 4, 'message' => 'Toto');
+$test = array('nom' => 'menu 6', 'liste_plats' => '[1,3]' , 'description' => "BlaBlaBla", 'id' => 1);
 
+updateMenu($test)
 
-
-$resultat = checkTheUsername('Toto');
-
-var_dump($resultat);
+//$resultat = showMeThisMenu(1);
+//var_dump($resultat);
 
 
 ?>

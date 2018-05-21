@@ -75,7 +75,7 @@ function updateUser($user){
     Database::disconnect();
 };
 
-//CHECH SI UN USERNANE EXISTE, return true si oui, false sinon
+//CHECH SI UN USERNAME EXISTE, return true si oui, false sinon
 function checkTheUsername($name){
 
     $db = Database::connect();
