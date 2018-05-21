@@ -1,3 +1,0 @@
-function showMeTheModal(){
-    $("#loginModal").modal();
-}

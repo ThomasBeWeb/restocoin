@@ -75,7 +75,7 @@ function updateUser($user){
     Database::disconnect();
 };
 
-//CHECH SI UN USERNAME EXISTE, return true si oui, false sinon
+//CHECH SI UN USERNAME EXISTE, return son id si oui, 0 sinon
 function checkTheUsername($name){
 
     $db = Database::connect();
@@ -84,12 +84,13 @@ function checkTheUsername($name){
     Database::disconnect();
 
     if($result === false){
-        return false;
+        return 0;
     }else{
-        return true;
+        return $result['id'];
     }
     
 };
+
 
 
 

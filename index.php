@@ -2,6 +2,7 @@
 require('./config.php');
 
 include "./template/header.php";
+include "./template/navbar.php";
 include "./template/modal.html";
 
 //Affichage content en fonction du GET
