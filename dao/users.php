@@ -14,8 +14,7 @@ function showMeTheUsers(){
 //RETOURNE UN SEUL USER
 function showMeThisUser($id){
     $db = Database::connect();
-    $statement = $db->prepare("SELECT * FROM USERS WHERE id = ?");
-    $statement->execute(array($id));
+    $statement = $db->query("SELECT * FROM USERS WHERE id = ".$id);
     $result = $statement->fetch();
     Database::disconnect();
 
@@ -80,8 +79,7 @@ function updateUser($user){
 function checkTheUsername($name){
 
     $db = Database::connect();
-    $statement = $db->prepare("SELECT * FROM USERS WHERE username = ?");
-    $statement->execute(array($name));
+    $statement = $db->query("SELECT * FROM USERS WHERE username = '".$name."'");
     $result = $statement->fetch();
     Database::disconnect();
 

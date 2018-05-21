@@ -2,9 +2,13 @@
 
 require_once("./dao/users.php");
 
-//$test = array('id' => 4, 'username' => 'Toto', 'password' => '1234', 'type' => 'user', 'email' => 'toto@tutu.fr');
+//$test = array('id_username' => 4, 'message' => 'Toto');
 
-$resultat = showMeThisUser(1);
+
+
+$resultat = checkTheUsername('Toto');
 
 var_dump($resultat);
+
+
 ?>
