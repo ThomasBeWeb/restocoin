@@ -20,7 +20,7 @@
             </div>
             <div class="form-group">
               <label for="password"><i class="fas fa-at"></i> Email</label>
-              <input type="password" class="form-control" name="email" id="email" placeholder="Enter your email adress"/>   
+              <input type="text" class="form-control" name="email" id="email" placeholder="Enter your email adress"/>   
           </div>
       </div>
       <div class="modal-footer">

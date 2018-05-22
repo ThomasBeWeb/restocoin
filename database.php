@@ -5,7 +5,7 @@ class Database
     private static $dbHost = "localhost";
     private static $dbName = "RESTO_DB_BWB";
     private static $dbUsername = "root";
-    private static $dbUserpassword = "root";
+    private static $dbUserpassword = "password";
     
     private static $connection = null;
     

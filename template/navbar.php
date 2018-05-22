@@ -45,7 +45,7 @@ if(isset($_COOKIE['checked']) AND $_COOKIE['checked'] === "ok" AND isset($_COOKI
                     <input type="text" class="form-control form-control-sm" name="username" id="username"  placeholder="Enter your Username" value=<?=$_COOKIE['username'];?>>
                     <h6 class="titreMiddle">Password</h6>
                     <input type="password" class="form-control form-control-sm wrongInput" name="password" id="password"  placeholder="password">
-                    <button type="submit" class="btn btn-primary btn-sm">Login</button>
+                    <button type="submit" class="btn btn-outline-primary btn-sm">Login</button>
                 </form>
             </div>
 
@@ -70,7 +70,7 @@ if(isset($_COOKIE['checked']) AND $_COOKIE['checked'] === "ok" AND isset($_COOKI
                 <input type="text" class="form-control form-control-sm" name="username" id="username"  placeholder="Enter your Username" value="administrateur"/>
                 <h6 class="titreMiddle">Password</h6>
                 <input type="password" class="form-control form-control-sm" name="password" id="password"  placeholder="password"/>
-                <button type="submit" class="btn btn-primary btn-sm">Login</button>
+                <button type="submit" class="btn btn-outline-primary btn-sm">Login</button>
             </form>
         </div>
 
