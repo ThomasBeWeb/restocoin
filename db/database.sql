@@ -87,14 +87,12 @@ insert into PLATS (id_type,nom,prix,url) VALUES(3,"Mochi",3.50,"./sources/mochi.
 insert into PLATS (id_type,nom,prix,url) VALUES(1,"Salade composée",3.50,"./sources/salad.jpg");
 
 /* Menus */
-insert into MENUS (nom,description,liste_plats) VALUES("Menu 3000K","Un peu trop maigre? Ce menu vous apportera toutes les calories pour grossir en un éclair!!","{7,1,3}");
-insert into MENUS (nom,description,liste_plats) VALUES("Menu raffiné","Surprenez vos papilles","{2,8,4}");
-insert into MENUS (nom,description,liste_plats) VALUES("Menu asiatique","Voyagez en asie le temps d'un repas","{6,8,10}");
-insert into MENUS (nom,description,liste_plats) VALUES("Menu bien de chez nous","La gastronomie française","{11,9,3}");
+insert into MENUS (nom,description,liste_plats) VALUES("Menu 3000K","Un peu trop maigre? Ce menu vous apportera toutes les calories pour grossir en un éclair!!","[7,1,3]");
+insert into MENUS (nom,description,liste_plats) VALUES("Menu raffiné","Surprenez vos papilles","[2,8,4]");
+insert into MENUS (nom,description,liste_plats) VALUES("Menu asiatique","Voyagez en asie le temps d'un repas","[6,8,10]");
+insert into MENUS (nom,description,liste_plats) VALUES("Menu bien de chez nous","La gastronomie française","[11,9,3]");
 
 /* Cartes */
-insert into CARTES (nom, liste_menus, date_creation, online) VALUES("Carte 1","{1,2,3}","2018-05-02",1);
-insert into CARTES (nom, liste_menus, date_creation, online) VALUES("Carte 2","{1,2,3,4}","2018-02-22",0);
-insert into CARTES (nom, liste_menus, date_creation, online) VALUES("Carte 3","{4,2}","2016-04-26",1);
-
-
+insert into CARTES (nom, liste_menus, date_creation, online) VALUES("Carte 1","[1,2,3]","2018-05-02",1);
+insert into CARTES (nom, liste_menus, date_creation, online) VALUES("Carte 2","[1,2,3,4]","2018-02-22",0);
+insert into CARTES (nom, liste_menus, date_creation, online) VALUES("Carte 3","[4,2]","2016-04-26",1);
