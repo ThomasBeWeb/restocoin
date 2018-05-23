@@ -52,7 +52,8 @@ create table if not exists CARTES(
   id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
   nom VARCHAR(20),
   liste_menus VARCHAR(128),
-  date_creation DATE
+  date_creation DATE,
+  online BOOL
 );
 
 /* Insertion des données - Jeu de test */
@@ -92,8 +93,8 @@ insert into MENUS (nom,description,liste_plats) VALUES("Menu asiatique","Voyagez
 insert into MENUS (nom,description,liste_plats) VALUES("Menu bien de chez nous","La gastronomie française","{11,9,3}");
 
 /* Cartes */
-insert into CARTES (nom, liste_menus, date_creation) VALUES("Carte 1","{1,2,3}","2018-05-02");
-insert into CARTES (nom, liste_menus, date_creation) VALUES("Carte 2","{1,2,3,4}","2018-02-22");
-insert into CARTES (nom, liste_menus, date_creation) VALUES("Carte 3","{4,2}","2016-04-26");
+insert into CARTES (nom, liste_menus, date_creation, online) VALUES("Carte 1","{1,2,3}","2018-05-02",1);
+insert into CARTES (nom, liste_menus, date_creation, online) VALUES("Carte 2","{1,2,3,4}","2018-02-22",0);
+insert into CARTES (nom, liste_menus, date_creation, online) VALUES("Carte 3","{4,2}","2016-04-26",1);
 
 

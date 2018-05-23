@@ -71,8 +71,3 @@ function updateMenu($Menu){
     $statement->execute(array($nom,$description,$listePlats,$id));
     Database::disconnect();
 };
-
-
-
-
-

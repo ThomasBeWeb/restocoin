@@ -75,7 +75,16 @@ function updatePlat($Plat){
     Database::disconnect();
 };
 
+//Retourne le prix d'un plat
+function giveMePlatPrice($id){
 
+    $db = Database::connect();
+    $statement = $db->query("SELECT prix FROM PLATS WHERE id = ".$id);
+    $result = $statement->fetch();
+    Database::disconnect();
+
+    return $result['prix'];
+};
 
 
 

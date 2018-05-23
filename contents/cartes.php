@@ -1,20 +1,16 @@
 <?php
+
+require './dao/cartes.php';
+require './dao/menus.php';
+
 //Recuperation de la liste des ID des cartes Online
 
-if ($stream = fopen('https://whispering-anchorage-52809.herokuapp.com/cartes/getonline', 'r')) {
-            
-        $listeIDsJson = stream_get_contents($stream, -1, 0);
-
-        //Conversion en tableau
-        $listeIDs = json_decode($listeIDsJson, true);
-
-        fclose($stream);
-}
+$listeCards = showMeTheCardsOnline()
 
 //En fonction du nb de cartes
 ?>
 <div class="row justify-content-center">
-<?php if(count($listeIDs) > 1):?>
+<?php if(count($listeCards) > 1):?>
         <h1>Nos cartes du moment</h1>
 <?php else: ?>
         <h1>Notre carte du moment</h1>
@@ -25,35 +21,28 @@ if ($stream = fopen('https://whispering-anchorage-52809.herokuapp.com/cartes/get
 <?php
 //Pour chaque carte, recup des infos et affichage
 
-foreach($listeIDs as $idCarte){
-
-        if ($stream = fopen('https://whispering-anchorage-52809.herokuapp.com/cartes/'.$idCarte.'/get', 'r')) {
-            
-                $myCardJson = stream_get_contents($stream, -1, 0);
-        
-                fclose($stream);
-        
-                //Conversion en tableau
-                $myCard = json_decode($myCardJson, true);
-        }
-        ?>
-        
+foreach($listeCards as $Carte){
+?>
         <div class="row justify-content-center">
-                <h2><?= $myCard['nom'];?></h2>
+                <h2><?= $Carte['nom'];?></h2>
         </div>
         <div class="d-flex flex-column">
         </div>
         
         <?php
-        foreach($myCard['menu'] as $value){
+        //Boucle sur la liste des menus
+        foreach($Carte['liste_menus'] as $menuID){
+
+        //Recup du menu
+        $menu = showMeThisMenu($menuID);
 
         //Prix du menu
-        $prixMenu = floatval($value['entree']['prix']) + floatval($value['plat']['prix']) + floatval($value['dessert']['nom']);
+        $prixMenu = giveMeMenuPrice($menuID);
 
         ?>
         <div class="d-flex flex-column petiteCarte">
                 <div class="p-2">
-                        <h3><?= $value['nom'] . " (" . $prixMenu . " €)"; ?></h3>
+                        <h3><?= $menu['nom'] . " (" . $prixMenu . " €)"; ?></h3>
                         <div class="p-2 d-flex flex-row justify-content-around">
                                 <div class="p-2">
                                         <h4>Entrée:</h4>

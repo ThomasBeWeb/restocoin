@@ -11,6 +11,16 @@ function showMeTheCards(){
     return $results;
 };
 
+//RETOURNE LA LISTE DES CARTES ONLINE
+function showMeTheCardsOnline(){
+    $db = Database::connect();
+    $statement = $db->query("SELECT * FROM CARTES WHERE online = 1");
+    $results = $statement->fetchAll(PDO::FETCH_CLASS);
+    Database::disconnect();
+
+    return $results;
+};
+
 //RETOURNE UNE SEULE CARTE
 function showMeThisCard($id){
     $db = Database::connect();
