@@ -1,0 +1,8 @@
+{
+    "type":"mysql",
+    "host":"localhost",
+    "port":"80",
+    "dbName":"RESTO_DB_BWB",
+    "user":"root",
+    "password":"password"
+}
