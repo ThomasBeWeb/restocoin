@@ -8,7 +8,7 @@ CREATE DATABASE IF NOT EXISTS RESTO_DB_BWB;
 USE RESTO_DB_BWB;
 
 /* Création de la table USERS */
-create table if not exists USERS(
+create table if not exists USER(
   id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
   username VARCHAR(20),
   password VARCHAR(1024),
@@ -59,10 +59,10 @@ create table if not exists CARTES(
 /* Insertion des données - Jeu de test */
 
 /* Users */
-insert into USERS (username,password,type,email) VALUES("administrateur","aaaa","admin","admin@restocoin.com");
-insert into USERS (username,password,type,email) VALUES("cuisto","aaaa","admin","cuisto@restocoin.com");
-insert into USERS (username,password,type,email) VALUES("jean","bbbb","user","jean@toto.com");
-insert into USERS (username,password,type,email) VALUES("jeanne","cccc","user","jeanne@hotmail.com");
+insert into USER (username,password,type,email) VALUES("administrateur","aaaa","admin","admin@restocoin.com");
+insert into USER (username,password,type,email) VALUES("cuisto","aaaa","admin","cuisto@restocoin.com");
+insert into USER (username,password,type,email) VALUES("jean","bbbb","user","jean@toto.com");
+insert into USER (username,password,type,email) VALUES("jeanne","cccc","user","jeanne@hotmail.com");
 
 /* Messages */
 insert into MESSAGES (id_username,date_creation,message) VALUES(3,"2017-12-22","Super restaurant, l'équipe est très sympa et les plats délicieux");
