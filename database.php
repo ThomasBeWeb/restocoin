@@ -27,9 +27,8 @@ final class Dao { //final empeche l'heritage
 
         return Dao::$instance;
     }
+}
 
-
-    }
 // class Database
 // {
 //     private static $dbHost = "localhost";

@@ -1,5 +1,6 @@
 <?php
-require("./database.php");
+
+    
 
 class Plat {
 	protected $id;
@@ -23,10 +24,10 @@ class Plat {
 
     private function load($id){
 
-        $db = Database::connect();
+        $db = Dao::$instance;
         $statement = $db->query("SELECT * FROM PLATS WHERE id = ".$id);
         $result = $statement->fetch();
-        Database::disconnect();
+        //Database::disconnect();
 
         $this->nom = $result['nom'];
         $this->prix = $result['prix'];

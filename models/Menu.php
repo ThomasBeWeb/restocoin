@@ -1,5 +1,5 @@
 <?php
-require_once("./database.php");
+require("./database.php");
 require("./models/Plat.php");
 
 class Menu {
@@ -23,8 +23,8 @@ class Menu {
     }
 
     private function load($id){
-
-        $db = Dao::get_instance();
+        $db = Dao::$instance;
+        //$db = Database::connect();
         $statement = $db->query("SELECT * FROM MENUS WHERE id = ".$id);
         $result = $statement->fetch();
         //Database::disconnect();
@@ -32,7 +32,11 @@ class Menu {
         $this->nom = $result['nom'];
         $this->description = $result['description'];
 
-        foreach ($result['liste_plats'] as $idPlat) {
+        $listePlats = json_decode($result['liste_plats']);
+
+        $this->liste_plats = array();
+
+        foreach ($listePlats as $idPlat) {
            $plat = new Plat($idPlat);
            array_push($this->liste_plats,$plat);
         }

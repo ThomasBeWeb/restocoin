@@ -23,10 +23,10 @@ class Carte {
 
     private function load($id){
 
-        $db = Dao::get_instance();
+        $db = Database::connect();
         $statement = $db->query("SELECT * FROM CARTES WHERE id = ".$id);
         $result = $statement->fetch();
-        //Database::disconnect();
+        Database::disconnect();
 
         $this->nom = $result['nom'];
         $this->description = $result['description'];
