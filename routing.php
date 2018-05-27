@@ -2,9 +2,9 @@
 
 //Affichage content en fonction de l'URI
 
-$liste = explode("/",$_SERVER['REQUEST_URI']);
+$uri = explode("/",$_SERVER['REQUEST_URI']);
 
-switch($liste[1]){
+switch($uri[2]){
 
     case "":    //Home
         include "./template/default.html";
@@ -18,3 +18,4 @@ switch($liste[1]){
         break;
 
 }
+

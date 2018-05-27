@@ -1,64 +1,138 @@
 <?php
 
-    
-
 class Plat {
-	protected $id;
-    protected $nom;
-    protected $prix;
-	protected $url;
 
-    public function __construct($id=null, $nom=null, $prix=null, $url=null)
+	private $id;
+
+	private $idType;
+
+	private $prix;
+
+	private $nom;
+
+	private $url;
+
+    public function __construct($id=null, $idType=null, $prix=null, $nom=null, $url=null)
     {
         $this->id = $id;
-        $this->nom = $nom;
+        $this->idType = $idType;
         $this->prix = $prix;
+        $this->nom = $nom;
         $this->url = $url;
-
-        //Si seul l'id est renseigné, on recupere les infos dans la BDD
-        if($nom === null AND $prix === null AND $url === null){
-            $this->load($id);
-
-        }
     }
 
-    private function load($id){
-
-        $db = Dao::$instance;
-        $statement = $db->query("SELECT * FROM PLATS WHERE id = ".$id);
-        $result = $statement->fetch();
-        //Database::disconnect();
-
-        $this->nom = $result['nom'];
-        $this->prix = $result['prix'];
-        $this->url = $result['url'];
-
-    }
-
-    public function create(){
-
-        $db = Database::connect();
-        $statement = $db->prepare("INSERT INTO PLATS 
-        (nom,prix,url)
-        VALUES(?, ?, ?)");
-        $statement->execute(array(
-            $this->nom,
-            $this->prix,
-            $this->url
-        ));
-        $this->id = $db->lastInsertId();
-        Database::disconnect();
-    }
-
-    public function to_array(){
+    public function to_json(){
 
         $array = array(
             "id" => $this->id,
-            "nom" => $this->nom,
+            "idType" => $this->idType,
             "prix" => $this->prix,
+            "nom" => $this->nom,
             "url" => $this->url
         );
 
-        return $array;
-    }
+        return json_encode($array);
+    }  
+
+
+
+	/**
+	 * Get the value of id
+	 */ 
+	public function getId()
+	{
+		return $this->id;
+	}
+
+	/**
+	 * Set the value of id
+	 *
+	 * @return  self
+	 */ 
+	public function setId($id)
+	{
+		$this->id = $id;
+
+		return $this;
+	}
+
+	/**
+	 * Get the value of idType
+	 */ 
+	public function getIdType()
+	{
+		return $this->idType;
+	}
+
+	/**
+	 * Set the value of idType
+	 *
+	 * @return  self
+	 */ 
+	public function setIdType($idType)
+	{
+		$this->idType = $idType;
+
+		return $this;
+	}
+
+	/**
+	 * Get the value of prix
+	 */ 
+	public function getPrix()
+	{
+		return $this->prix;
+	}
+
+	/**
+	 * Set the value of prix
+	 *
+	 * @return  self
+	 */ 
+	public function setPrix($prix)
+	{
+		$this->prix = $prix;
+
+		return $this;
+	}
+
+	/**
+	 * Get the value of nom
+	 */ 
+	public function getNom()
+	{
+		return $this->nom;
+	}
+
+	/**
+	 * Set the value of nom
+	 *
+	 * @return  self
+	 */ 
+	public function setNom($nom)
+	{
+		$this->nom = $nom;
+
+		return $this;
+	}
+
+	/**
+	 * Get the value of url
+	 */ 
+	public function getUrl()
+	{
+		return $this->url;
+	}
+
+	/**
+	 * Set the value of url
+	 *
+	 * @return  self
+	 */ 
+	public function setUrl($url)
+	{
+		$this->url = $url;
+
+		return $this;
+	}
 }

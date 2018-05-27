@@ -59,7 +59,7 @@ class DAOUser extends Dao {
 
     public function getAllBy($filter){
 
-        $request = "";
+        $request = "SELECT * FROM USER ";
 
         $i = 0;
 
@@ -72,9 +72,9 @@ class DAOUser extends Dao {
             $request .= $key."='".$value."'";
         }
         
-        $users;
-        $result = $this->pdo->query->fetchAll();
-        foreach ($result as $result) {
+        $users = array();
+        $results = $this->pdo->query($request)->fetchAll();
+        foreach ($results as $result) {
             $user = new User();
             $user->setId($result['id']);
             $user->setEmail($result['email']);
@@ -83,6 +83,8 @@ class DAOUser extends Dao {
 
             array_push($users,$user);
         }
+
+        return $users;
 
     }
 }

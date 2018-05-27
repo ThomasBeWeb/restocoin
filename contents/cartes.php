@@ -1,11 +1,9 @@
 <?php
 
-require './dao/cartes.php';
-require './dao/menus.php';
-
-//Recuperation de la liste des ID des cartes Online
-
-$listeCards = showMeTheCardsOnline()
+//Recuperation de la liste des cartes Online
+$filtre = array("online"=> 1);
+$dao = new DAOCarte();
+$listeCards = $dao->getAllBy($filtre);
 
 //En fonction du nb de cartes
 ?>
@@ -19,30 +17,29 @@ $listeCards = showMeTheCardsOnline()
 <hr>
 
 <?php
-//Pour chaque carte, recup des infos et affichage
+//Pour chaque carte: affichage
 
 foreach($listeCards as $Carte){
 ?>
         <div class="row justify-content-center">
-                <h2><?= $Carte['nom'];?></h2>
+                <h2><?= $Carte->getNom();?></h2>
         </div>
         <div class="d-flex flex-column">
         </div>
-        
-        <?php
-        //Boucle sur la liste des menus
-        foreach($Carte['liste_menus'] as $menuID){
 
-        //Recup du menu
-        $menu = showMeThisMenu($menuID);
+        <?php
+
+                var_dump($Carte->getListeMenus());
+        //Boucle sur la liste des menus
+        foreach($Carte->getListeMenus() as $menu){
 
         //Prix du menu
-        $prixMenu = giveMeMenuPrice($menuID);
+        $prixMenu = 0 //giveMeMenuPrice($menuID);
 
         ?>
         <div class="d-flex flex-column petiteCarte">
                 <div class="p-2">
-                        <h3><?= $menu['nom'] . " (" . $prixMenu . " €)"; ?></h3>
+                        <h3><?= $menu->getNom();?> . " (" . $prixMenu . " €)"; ?></h3>
                         <div class="p-2 d-flex flex-row justify-content-around">
                                 <div class="p-2">
                                         <h4>Entrée:</h4>

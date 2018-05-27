@@ -1,36 +1,47 @@
 <?php
 
-class DAOUser extends Dao {
+class DAOCarte extends Dao {
 
     public function __contruct(){
         parent::__construct();
     }
     
-    public function create($user){
-        $sql = "INSERT INTO USER (username,password,email) VALUES ('"
-        .$user->getUsername()."','"
-        .$user->getPassword()."','"
-        .$user->getEmail()."')";
+    public function create($card){
+        $sql = "INSERT INTO CARTE (nom,liste_menus,date_creation,online) VALUES ('"
+        .$card->getNom()."','"
+        .$card->getListeMenu()."','"
+        .$card->getDateCreation()."','"
+        .$card->getOnline()."')";
         var_dump($sql);
         $this->pdo->query($sql)->execute();
     }
 
     public function delete($id){
-        $sql = "DELETE FROM USER WHERE ID = ".$id;
+        $sql = "DELETE FROM CARTE WHERE ID = ".$id;
         $this->pdo->query($sql)->execute();
     }
 
 
     public function retrieve($id){
-        $sql = "SELECT * FROM USER WHERE id=".$id;
+        $sql = "SELECT * FROM CARTE WHERE id=".$id;
         $result = $this->pdo->query($sql)->fetch(PDO::FETCH_ASSOC);
-        $user = new User();
-        $user->setId($result['id']);
-        $user->setEmail($result['email']);
-        $user->setPassword($result['password']);
-        $user->setUsername($result['username']);
+        $card = new Carte();
+        $card->setId($result['id']);
+        $card->setNom($result['nom']);
+        $card->setDateCreation($result['date_creation']);
+        $card->setOnline($result['online']);
 
-        return $user;
+        $listeMenus = array();
+
+        foreach ($result['liste_menus'] as $idMenu) {
+            $menu = new Menu();
+            $menu = $dao->retrieve($idMenu);
+            array_push($listeMenus,$menu);
+        }
+
+        $card->setListeMenus($listeMenus);
+
+        return $card;
     }
 
     public function update($entity, $columns = null){
@@ -39,27 +50,37 @@ class DAOUser extends Dao {
 
     public function getAll(){
 
-        $sql = "SELECT * FROM USER";
+        $sql = "SELECT * FROM CARTE";
         $results = $this->pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
 
-        $users = array();
+        $cards = array();
 
         foreach ($results as $result) {
-            $user = new User();
-            $user->setId($result['id']);
-            $user->setEmail($result['email']);
-            $user->setPassword($result['password']);
-            $user->setUsername($result['username']);
+            $card = new Carte();
+            $card->setId($result['id']);
+            $card->setNom($result['nom']);
+            $card->setDateCreation($result['date_creation']);
+            $card->setOnline($result['online']);
 
-            array_push($users,$user);
+            $listeMenus = array();
+
+            foreach ($result['liste_menus'] as $idMenu) {
+                $menu = new Menu();
+                $menu = $dao->retrieve($idMenu);
+                array_push($listeMenus,$menu);
+            }
+    
+            $card->setListeMenus($listeMenus);
+
+            array_push($cards,$card);
         }
 
-        return $users;
+        return $cards;
     }
 
     public function getAllBy($filter){
 
-        $request = "";
+        $request = "SELECT * FROM CARTE ";
 
         $i = 0;
 
@@ -71,18 +92,30 @@ class DAOUser extends Dao {
             }
             $request .= $key."='".$value."'";
         }
-        
-        $users;
-        $result = $this->pdo->query->fetchAll();
-        foreach ($result as $result) {
-            $user = new User();
-            $user->setId($result['id']);
-            $user->setEmail($result['email']);
-            $user->setPassword($result['password']);
-            $user->setUsername($result['username']);
+        var_dump($request);
+        $cards = array();
+        $results = $this->pdo->query($request)->fetchAll();
+        foreach ($results as $result) {
+            $card = new Carte();
+            $card->setId($result['id']);
+            $card->setNom($result['nom']);
+            $card->setDateCreation($result['date_creation']);
+            $card->setOnline($result['online']);
 
-            array_push($users,$user);
+            $listeMenus = array();
+
+            foreach ($result['liste_menus'] as $idMenu) {
+                $menu = new Menu();
+                $menu = $dao->retrieve($idMenu);
+                array_push($listeMenus,$menu);
+            }
+    
+            $card->setListeMenus($listeMenus);
+
+            array_push($cards,$card);
         }
+
+        return $cards;
 
     }
 }

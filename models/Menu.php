@@ -1,74 +1,109 @@
 <?php
-require("./database.php");
-require("./models/Plat.php");
 
 class Menu {
-	protected $id;
-	protected $nom;
-	protected $description;
-	protected $liste_plats;
+	private $id;
+	private $nom;
+	private $description;
+	private $listePlats;
 
-    public function __construct($id=null, $nom=null, $description=null, $liste_plats=null)
+    public function __construct($id=null,$nom=null,$description=null,$listePlats=null)
     {
         $this->id = $id;
         $this->nom = $nom;
         $this->description = $description;
-        $this->liste_plats = $liste_plats;
-
-        //Si seul l'id est renseigné, on recupere les infos dans la BDD
-        if($nom === null AND $description === null AND $liste_plats === null){
-            $this->load($id);
-        
-        }
+        $this->listePlats = $listePlats;
     }
 
-    private function load($id){
-        $db = Dao::$instance;
-        //$db = Database::connect();
-        $statement = $db->query("SELECT * FROM MENUS WHERE id = ".$id);
-        $result = $statement->fetch();
-        //Database::disconnect();
-
-        $this->nom = $result['nom'];
-        $this->description = $result['description'];
-
-        $listePlats = json_decode($result['liste_plats']);
-
-        $this->liste_plats = array();
-
-        foreach ($listePlats as $idPlat) {
-           $plat = new Plat($idPlat);
-           array_push($this->liste_plats,$plat);
-        }
-
-    }
-
-    public function create(){
-
-        $db = Database::connect();
-        $statement = $db->prepare("INSERT INTO MENUS 
-        (nom,description,liste_plats)
-        VALUES(?, ?, ?)");
-        $statement->execute(array(
-            $this->nom,
-            $this->description,
-            $this->liste_plats
-        ));
-        $this->id = $db->lastInsertId();
-        Database::disconnect();
-    }
-
-    public function to_array(){
+    public function to_json(){
 
         $array = array(
             "id" => $this->id,
             "nom" => $this->nom,
             "description" => $this->description,
-            "liste_plats" => $this->liste_plats
+            "listePlats" => $this->listePlats
         );
 
-        return $array;
-    }
+        return json_encode($array);
+    }    
+	
 
+	/**
+	 * Get the value of id
+	 */ 
+	public function getId()
+	{
+		return $this->id;
+	}
 
+	/**
+	 * Set the value of id
+	 *
+	 * @return  self
+	 */ 
+	public function setId($id)
+	{
+		$this->id = $id;
+
+		return $this;
+	}
+
+	/**
+	 * Get the value of nom
+	 */ 
+	public function getNom()
+	{
+		return $this->nom;
+	}
+
+	/**
+	 * Set the value of nom
+	 *
+	 * @return  self
+	 */ 
+	public function setNom($nom)
+	{
+		$this->nom = $nom;
+
+		return $this;
+	}
+
+	/**
+	 * Get the value of description
+	 */ 
+	public function getDescription()
+	{
+		return $this->description;
+	}
+
+	/**
+	 * Set the value of description
+	 *
+	 * @return  self
+	 */ 
+	public function setDescription($description)
+	{
+		$this->description = $description;
+
+		return $this;
+	}
+
+	/**
+	 * Get the value of listePlats
+	 */ 
+	public function getListePlats()
+	{
+		return $this->listePlats;
+	}
+
+	/**
+	 * Set the value of listePlats
+	 *
+	 * @return  self
+	 */ 
+	public function setListePlats($listePlats)
+	{
+		$this->listePlats = $listePlats;
+
+		return $this;
+	}
 }

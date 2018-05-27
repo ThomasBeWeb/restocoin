@@ -2,9 +2,9 @@
 //Liste des liens de base
 $listeFichiers = array(
     "Home" => $GLOBALS['racine'],
-    "Nos cartes" => $GLOBALS['racine']."?page=cartes",
-    "Contact" => $GLOBALS['racine']."?page=contact",
-    "Livred'Or" => $GLOBALS['racine']."?page=livredor",
+    "Nos cartes" => $GLOBALS['racine']."lastCards",
+    "Contact" => $GLOBALS['racine']."contact",
+    "Livred'Or" => $GLOBALS['racine']."livredor",
 );
 
 //Si Admin ET password confirmé, ajout de la page Administration
