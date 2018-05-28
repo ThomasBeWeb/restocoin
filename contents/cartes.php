@@ -18,7 +18,7 @@ $listeCards = $dao->getAllBy($filtre);
 
 <?php
 //Pour chaque carte: affichage
-
+var_dump($listeCards);
 foreach($listeCards as $Carte){
 ?>
         <div class="row justify-content-center">
@@ -29,7 +29,6 @@ foreach($listeCards as $Carte){
 
         <?php
 
-                var_dump($Carte->getListeMenus());
         //Boucle sur la liste des menus
         foreach($Carte->getListeMenus() as $menu){
 

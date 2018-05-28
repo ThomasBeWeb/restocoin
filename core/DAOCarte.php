@@ -12,7 +12,6 @@ class DAOCarte extends Dao {
         .$card->getListeMenu()."','"
         .$card->getDateCreation()."','"
         .$card->getOnline()."')";
-        var_dump($sql);
         $this->pdo->query($sql)->execute();
     }
 
@@ -35,6 +34,7 @@ class DAOCarte extends Dao {
 
         foreach ($result['liste_menus'] as $idMenu) {
             $menu = new Menu();
+            $dao = new DAOMenu();
             $menu = $dao->retrieve($idMenu);
             array_push($listeMenus,$menu);
         }
@@ -66,6 +66,7 @@ class DAOCarte extends Dao {
 
             foreach ($result['liste_menus'] as $idMenu) {
                 $menu = new Menu();
+                $dao = new DAOMenu();
                 $menu = $dao->retrieve($idMenu);
                 array_push($listeMenus,$menu);
             }
@@ -92,9 +93,10 @@ class DAOCarte extends Dao {
             }
             $request .= $key."='".$value."'";
         }
-        var_dump($request);
+        
         $cards = array();
         $results = $this->pdo->query($request)->fetchAll();
+        
         foreach ($results as $result) {
             $card = new Carte();
             $card->setId($result['id']);
@@ -104,9 +106,14 @@ class DAOCarte extends Dao {
 
             $listeMenus = array();
 
-            foreach ($result['liste_menus'] as $idMenu) {
+            $listeIdMenus = json_decode($result['liste_menus'],true);
+
+            foreach ($listeIdMenus as $idMenu) {
+
                 $menu = new Menu();
+                $dao = new DAOMenu();
                 $menu = $dao->retrieve($idMenu);
+                
                 array_push($listeMenus,$menu);
             }
     

@@ -4,7 +4,7 @@
 
 $uri = explode("/",$_SERVER['REQUEST_URI']);
 
-switch($uri[2]){
+switch($uri[1]){
 
     case "":    //Home
         include "./template/default.html";
