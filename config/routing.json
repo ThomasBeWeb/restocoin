@@ -1,0 +1,14 @@
+{
+    "/": "ViewController:homePage",
+    "/lastCard":"ViewController:render",
+    "/api/users":{
+        "GET":"UserController:getAllUsers",
+        "DELETE":"UserController:deleteAll",
+        "POST":"UserController:create"
+    },
+    "/api/users/µ1":{
+        "GET":"UserController:getUser",
+        "POST":"UserController:updateUser",
+        "DELETE":"UserController:deleteUser"
+    }
+}

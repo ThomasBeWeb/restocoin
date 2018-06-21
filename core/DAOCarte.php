@@ -1,9 +1,40 @@
 <?php
+namespace BWB\CORE;
 
 class DAOCarte extends Dao {
 
     public function __contruct(){
         parent::__construct();
+    }
+
+    public function retrieveOnline(){
+        $sql = "SELECT * FROM CARTES WHERE online = 1";
+        $results = $this->pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
+
+        $cards = array();
+
+        foreach ($results as $result) {
+            $card = new Carte();
+            $card->setId($result['id']);
+            $card->setNom($result['nom']);
+            $card->setDateCreation($result['date_creation']);
+            $card->setOnline($result['online']);
+
+            $listeMenus = array();
+
+            foreach ($result['liste_menus'] as $idMenu) {
+                $menu = new Menu();
+                $dao = new DAOMenu();
+                $menu = $dao->retrieve($idMenu);
+                array_push($listeMenus,$menu);
+            }
+    
+            $card->setListeMenus($listeMenus);
+
+            array_push($cards,$card);
+        }
+
+        return $cards;
     }
     
     public function create($card){
@@ -44,7 +75,27 @@ class DAOCarte extends Dao {
         return $card;
     }
 
-    public function update($entity, $columns = null){
+    //Update d'une carte selon son id, 2eme argument: tableau assoc "column => nouvelle valeur"
+    public function update($idCard,$newValeurs){
+
+        $sql = "UPDATE CARTE SET ";
+
+        $compteur = 0;
+
+        foreach ($newValeurs as $key => $value) {
+
+            if($compteur === (count($newValeurs)-1)){
+                $sql .= $key . " = '" . $value . "' ";
+            }else{
+                $sql .= $key . " = '" . $value . "', ";
+            }
+
+            $compteur++;
+        }
+
+        $sql .= "WHERE id = " . $idCard;
+
+        $this->pdo->query($sql)->execute();
 
     }
 

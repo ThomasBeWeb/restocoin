@@ -1,4 +1,5 @@
 <?php
+namespace BWB\CORE;
 
 class DAOUser extends Dao {
 
@@ -33,7 +34,27 @@ class DAOUser extends Dao {
         return $user;
     }
 
-    public function update($entity, $columns = null){
+    //Update d'un user selon son id, 2eme argument: tableau assoc "column => nouvelle valeur"
+    public function update($idUser,$newValeurs){
+
+        $sql = "UPDATE USER SET ";
+
+        $compteur = 0;
+
+        foreach ($newValeurs as $key => $value) {
+
+            if($compteur === (count($newValeurs)-1)){
+                $sql .= $key . " = '" . $value . "' ";
+            }else{
+                $sql .= $key . " = '" . $value . "', ";
+            }
+
+            $compteur++;
+        }
+
+        $sql .= "WHERE id = " . $idUser;
+
+        $this->pdo->query($sql)->execute();
 
     }
 

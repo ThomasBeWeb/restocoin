@@ -1,4 +1,5 @@
 <?php
+namespace BWB\CORE;
 
 class DAOMenu extends Dao {
 
@@ -33,9 +34,29 @@ class DAOMenu extends Dao {
         return $menu;
     }
 
-    public function update($entity, $columns = null){
+        //Update d'un menu selon son id, 2eme argument: tableau assoc "column => nouvelle valeur"
+        public function update($idMenu,$newValeurs){
 
-    }
+            $sql = "UPDATE MENU SET ";
+    
+            $compteur = 0;
+    
+            foreach ($newValeurs as $key => $value) {
+    
+                if($compteur === (count($newValeurs)-1)){
+                    $sql .= $key . " = '" . $value . "' ";
+                }else{
+                    $sql .= $key . " = '" . $value . "', ";
+                }
+    
+                $compteur++;
+            }
+    
+            $sql .= "WHERE id = " . $idMenu;
+    
+            $this->pdo->query($sql)->execute();
+    
+        }
 
     public function getAll(){
 

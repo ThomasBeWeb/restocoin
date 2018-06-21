@@ -1,5 +1,5 @@
 <?php
-
+namespace BWB\CORE;
 /**
  * Le dao est un objet servant de couche intermediare entre la couche metier et la db
  * Cet objet ne doit exister qu'en un seul exemplaire (Singleton)

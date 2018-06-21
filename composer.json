@@ -1,0 +1,17 @@
+{
+    "name": "cantinelli/restocoin",
+    "authors": [
+        {
+            "name": "ThomasBeWeb",
+            "email": "tcantinelli@gmail.com"
+        }
+    ],
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "BWB\\CORE\\":"core",
+            "BWB\\CONTROLLERS\\":"controllers",
+            "BWB\\MODELS\\":"models"
+        }
+    }
+}

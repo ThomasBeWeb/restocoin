@@ -1,4 +1,5 @@
 <?php
+namespace BWB\CORE;
 
 interface Crud_interface {
 

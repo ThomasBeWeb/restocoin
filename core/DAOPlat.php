@@ -1,4 +1,5 @@
 <?php
+namespace BWB\CORE;
 
 class DAOPlat extends Dao {
 
@@ -35,7 +36,29 @@ class DAOPlat extends Dao {
         return $plat;
     }
 
-    public function update($entity, $columns = null){
+    //Update d'un plat selon son id, 2eme argument: tableau assoc "column => nouvelle valeur"
+    public function update($idPlat,$newValeurs){
+
+        $sql = "UPDATE PLAT SET ";
+
+        $compteur = 0;
+
+        foreach ($newValeurs as $key => $value) {
+
+            if($compteur === (count($newValeurs)-1)){
+                $sql .= $key . " = '" . $value . "' ";
+            }else{
+                $sql .= $key . " = '" . $value . "', ";
+            }
+
+            $compteur++;
+        }
+
+        $sql .= "WHERE id = " . $idPlat;
+
+        echo $sql;
+
+        $this->pdo->query($sql)->execute();
 
     }
 
